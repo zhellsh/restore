@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
-echo "This script will setup your new install of *nux!"
-echo "Please enter name of backup with filetype ommited:"
-read back
 apt-prep() {
 	sudo apt update
 	sudo apt upgrade -y
@@ -21,11 +18,11 @@ dev_suite() {
 	mkdir -p dev/rust dev/nim dev/nasm
 }
 restore() {
-	lz4 -d $back.tar.lz4
-	tar xvf $back.tar -C oldhome/
+	lz4 -d $1.tar.lz4
+	tar xvf $1.tar -C oldhome/
 }
 apt-prep
 kernel_upgrade
 dev_suite
-restore
+restore $1
 reboot
